@@ -1,7 +1,5 @@
-include openssl
-include nginx
-
 $packages = ['curl','nginx','openssl'] 
+$docroot = '/var/www/html'
 
 package { $packages: 
    ensure => "installed" 
@@ -9,6 +7,10 @@ package { $packages:
 
 service { 'nginx':
   ensure => running,
+#  ssl => true,
+#  ssl_only => true,
+#  ssl_cert => 'files/cert.pem',
+#  ssl_key => 'files/jey.pem',
 }
 
 tidy { '/etc/nginx/sites-available/default': }
@@ -17,12 +19,13 @@ file { "/etc/nginx/sites-available/reverse-proxy.conf":
   ensure => 'present',
 #
 # I had problems to send nginx configuration content so I put it inline:
+# Configuration file for nginx as reverse proxy
 #
   content => '
 server {
-    # Change to 443;
-    listen       80 default_server;
-    server_name  _;
+  listen	443 ssl;
+  # listen	80 default_server;
+  server_name	_;
 
 # Must start by /resource2
     location /resource2 {
@@ -48,10 +51,10 @@ file { "/etc/nginx/sites-enabled/reverse-proxy.conf":
 }
 
 # Creates an index file for testing
-file { '/var/www/html/index.html':
-  ensure => present,
-  mode => "0644",
-  owner => "root",
-  group => "root",
+file { "${docroot}/index.html":
+#  ensure => present,
+#  mode => "0644",
+#  owner => "root",
+#  group => "root",
   content => "<h1>Happy Puppet</h1>",
 }
