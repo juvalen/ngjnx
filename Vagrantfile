@@ -9,4 +9,7 @@ Vagrant.configure("2") do |config|
     }
   end
 
+# Renames VM
+  config.vm.define :puppet do |t|
+  end
 end
