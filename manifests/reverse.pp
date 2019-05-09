@@ -1,4 +1,7 @@
-$packages = ['curl','nginx'] 
+include openssl
+include nginx
+
+$packages = ['curl','nginx','openssl'] 
 
 package { $packages: 
    ensure => "installed" 
@@ -12,7 +15,9 @@ tidy { '/etc/nginx/sites-available/default': }
 
 file { "/etc/nginx/sites-available/reverse-proxy.conf":
   ensure => 'present',
-# nginx configuration content
+#
+# I had problems to send nginx configuration content so I put it inline:
+#
   content => '
 server {
     # Change to 443;
@@ -27,8 +32,8 @@ server {
     }
 
     location / {
-        # All others to aaa.com
-        proxy_pass http://www.aaa.com/;
+        # All others to gg.com
+        proxy_pass http://www.gg.com/;
 #        proxy_pass http://20.20.20.20/;
     }
 

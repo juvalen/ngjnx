@@ -1,42 +1,22 @@
 # Installing a reverse proxy using puppet (virtualbox provider)
- puppet module install puppet-nginx --version 0.16.0
- https://forge.puppet.com/puppet/nginx
+This script installs nginx working as a reverse proxy with vagrant in Virtualbox.
+It now works at port 80
 
- Now nginx running
+## Requirements
+A Virtualbox appliance
+Puppet installed
+$ puppet module install puppet-nginx --version 0.16.0 (from https://forge.puppet.com/puppet/nginx)
 
- Trying to achieve this:
- https://stackoverflow.com/questions/24153952/how-to-define-a-second-nginx-location-clause-inside-a-puppet-vhost
- Remove the virtual host:
- * unlink /etc/nginx/sites-enabled/default
+## Operation
+Puppet needs both nginx & openssl modules installed.
+$ puppet module install puppet-nginx
+$ puppet module install camptocamp-openssl
 
- This has to be but in /etc/nginx/sites-available/reverse-proxy.conf
+To run just enter:
+$ vagrant up -provision
 
-server {
-    # Change to 443;
-    listen       80 default_server;
-    server_name  _;
-
-    location /resource2 {
-        # Requests to resource2/ are redirected to google.com
-        proxy_pass http://www.google.com/;
-#        proxy_pass http://10.10.10.10/;
-    }
-
-    location / {
-        # All others to aaa.com
-        proxy_pass http://www.aaa.com/;
-#        proxy_pass http://20.20.20.20/;
-    }
-
-}
-
- * ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/reverse-proxy.conf
-
-
-If proxy_pass is specified without a URI, the request URI is passed to the server in the same form as sent by a client when the original request is processed, or the full normalized request URI is passed when processing the changed URI:
-  location /some/path/ {
-    proxy_pass http://127.0.0.1;
-  }
-
+Them from the virtual machine it can be tested:
+$ curl localhost/resource2 (dumps content of www.google.com) 
+$ curl localhost/whatever  (dumps content of www.gg.com) 
 
 
