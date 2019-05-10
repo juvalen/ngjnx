@@ -1067,7 +1067,7 @@ enforce-blocks 0
 #      access to nothing but www.example.com (or other domains hosted
 #      on the same system):
 #
-#        permit-access  192.168.1.0/24
+#        permit-access  www.privoxy.org/24 www.example.com/32
 #
 #      Allow access from any host on the 26-bit subnet 192.168.45.64
 #      to anywhere, with the exception that 192.168.45.73 may not
