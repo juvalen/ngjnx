@@ -1,4 +1,4 @@
 openssl req -new -x509 -days 365 -nodes \
   -out /etc/ssl/certs/postfix.pem \
   -keyout /etc/ssl/private/postfix.pem \
-  -subj "/C=ES/ST=Madrid/L=Madrid/O=IT/CN=www.ejemplo.es"
+  -subj "/C=ES/ST=Madrid/L=Madrid/O=IT/CN=ngjnx"

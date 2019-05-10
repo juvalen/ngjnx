@@ -7,11 +7,9 @@ This module installs nginx working as a reverse proxy with vagrant in Virtualbox
 * Puppet and modules installed
 
 ### Operation
-Puppet needs both nginx & openssl modules installed.
+Puppet needs nginx module installed.
 
 `$ puppet module install puppet-nginx`
-
-`$ puppet module install camptocamp-openssl`
 
 To construct and deploy the server just enter:
 $ vagrant up -provision
@@ -24,10 +22,16 @@ Them from the virtual machine it can be tested:
 
 or access virtualbox IP at port 80. It will work with https. 
 
+The IP address of the box could be retrieve from host using:
+
+`vagrant ssh -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
+
+provided the interface used in the box in **enp0s8**.
+
 ### Certificate for https
 Generated ahead in host with:
 
-`$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -subj "/C=ES/ST=Madrid/L=Madrid/O=IT/CN=www.ejemplo.es"`
+`$ openssl req -x509 -newkey rsa:4096 -keyout cert.pem -out cert.pem -days 365 -subj "/C=ES/ST=Madrid/L=Madrid/O=IT/CN=ubuntu-xenial"`
 
-Passphrase **qwe123**
+which generated both cert.key and cert.pem in `/vagrant/files` with no passphrase.
 
