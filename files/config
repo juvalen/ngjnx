@@ -1451,7 +1451,7 @@ forwarded-connect-retries  0
 #
 #      accept-intercepted-requests 1
 #
-accept-intercepted-requests 0
+accept-intercepted-requests 1
 #
 #  6.2. allow-cgi-request-crunching
 #  =================================
