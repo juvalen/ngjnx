@@ -20,7 +20,7 @@ Them from the virtual machine it can be tested:
 
 `$ curl localhost/whatever  (dumps content of www.gg.com)`
 
-or access virtualbox IP at port 80. It will work with https. 
+or access virtualbox IP at port 80. It works with https. 
 
 The IP address of the box could be retrieve from host using:
 
