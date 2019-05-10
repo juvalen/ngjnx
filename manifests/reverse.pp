@@ -1,5 +1,5 @@
-$packages = ['curl','nginx','openssl'] 
 $docroot = '/var/www/html'
+$packages = ['curl','nginx','openssl'] 
 
 package { $packages: 
    ensure => "installed" 
@@ -23,8 +23,8 @@ file { "/etc/nginx/sites-available/reverse-proxy.conf":
 #
   content => '
 server {
-  listen	443 ssl;
-  # listen	80 default_server;
+  # listen	443 ssl;
+  listen	80 default_server;
   server_name	_;
 
 # Must start by /resource2
