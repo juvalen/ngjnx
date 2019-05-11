@@ -17,11 +17,15 @@ To build and deploy the servers just enter:
 
 `$ vagrant up -provision`
 
-and two machines will be created in Virtualbox:
+and two machines will be created in Virtualbox with names:
 
 - reverse
 
 - log-proxy
+
+Connect to the machine with:
+
+`$ vagrant ssh NAME`
 
 ## reverse: nginx as reverse proxy with routing
 From the virtual machine it can be tested:
@@ -34,12 +38,15 @@ or accessing virtualbox IP at port 80. It works with https as:
 
 `$ curl -k https://localhost/whatever  (dumps content of www.gg.com)`
 
+Or from other nodes in the network:
+
+`$ curl -k https://<IP>/whatever`
 
 The IP address of the box could be retrieved from host using:
 
 `vagrant ssh -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
 
-provided the interface used in the box is **enp0s8**.
+provided the interface used in the box is **enp0s8**, fact to be retrieved from the machine.
 
 ### Certificate for https
 Generated ahead in host with:
@@ -50,7 +57,9 @@ which produced both cert.key and cert.pem in `/vagrant/files` with no passphrase
 
 
 ## log-proxy: Privoxy proxy for log analysis
-Privoxy server is installed in a machine labeled "log-proxy" and listening at port 3128. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
+Privoxy server is installed in a machine labeled "logproxy" and listening at port 3128. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
+ > log-proxy is used everywhere
+ > logproxy is used in manifest variables and box name
 
 Config file at files/config containing all the proxy configuration will be copied in the node.
 

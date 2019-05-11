@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     logproxy.vm.network "public_network", bridge: "wlp16s0"
 
     # Setting up an updated xenial64 machine
-    logproxy.vm.provision "shell", inline: "apt -y update && apt -y install puppet"
+    logproxy.vm.provision "shell", inline: "apt -y update && apt -y install puppet && apt install privoxy"
 
     logproxy.vm.provision "puppet" do |ngjnx|
       ngjnx.manifests_path = "manifests"
@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
     end
 
     logproxy.vm.provider :virtualbox do |vb|
-      vb.name = "log-proxy"
+      vb.name = "logproxy"
     end
   end
 

@@ -3,15 +3,15 @@ Vagrant.configure("2") do |config|
   config.vm.network "public_network", bridge: "wlp16s0"
 
   # Setting up an updated xenial64 machine
-  config.vm.provision "shell", inline: "apt -y update && apt -y install puppet"
+  config.vm.provision "shell", inline: "apt -y update && apt -y install puppet && apt -y install privoxy"
 
   config.vm.provision "puppet" do |ngjnx|
     ngjnx.manifests_path = "manifests"
-    ngjnx.manifest_file = "log.pp"
+    ngjnx.manifest_file = "log-proxy.pp"
   end
 
   config.vm.provider :virtualbox do |vb|
-    vb.name = "log-proxy"
+    vb.name = "logproxy"
   end
 
 end

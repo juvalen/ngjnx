@@ -1,17 +1,20 @@
 $log = '/var/log/nginx/proxy.log'
-$packages = ['curl','privoxy'] 
+$packages = ['curl'] 
 
 package { $packages: 
-   ensure => "installed",
+  ensure => "installed",
 }
 
-#exec { 'privoxy':
-#  environment => [ 'http_proxy=localhost:3128' ]
-#}
-
 file { "/etc/privoxy/config":
-  ensure => 'link',
+  ensure => 'file',
   target => "/vagrant/files/config",
+  notify => Exec[listen-address],
+}
+
+exec { 'listen-address':
+  command => "listen-address-enp0s8",
+  path => "/vagrant/files/",
+  user => "root",
   notify => Service[privoxy],
 }
 

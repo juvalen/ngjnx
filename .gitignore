@@ -1,2 +1,4 @@
 .vagrant
 *.log
+*.swp
+files/listen-address-wlp16s0
