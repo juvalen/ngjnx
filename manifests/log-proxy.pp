@@ -6,15 +6,15 @@ package { $packages:
 }
 
 file { "/etc/privoxy/config":
-  ensure => 'file',
-  target => "/vagrant/files/config",
+  ensure => 'present',
+  source => "/vagrant/files/config",
+  owner => "vagrant",
   notify => Service[privoxy],
 #  notify => Exec[listen-address],
 }
 
 #exec { 'listen-address':
-#  command => "listen-address-enp0s8",
-#  path => "/vagrant/files/",
+#  command => "/vagrant/files/listen-address-enp0s8",
 #  user => "root",
 #  notify => Service[privoxy],
 #}

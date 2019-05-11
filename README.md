@@ -23,7 +23,7 @@ Also create a new file with the name of your interface at the box and replace it
 ### Operation
 To build and deploy the servers just enter:
 
-`$ vagrant up -provision`
+`$ vagrant up`
 
 and two machines will be created in Virtualbox with names:
 
@@ -64,10 +64,10 @@ Generated ahead in host with:
 which produced both cert.key and cert.pem in `/vagrant/files` with no passphrase.
 
 
-## log-proxy: Privoxy proxy for log analysis
+## logproxy: Privoxy proxy for log analysis
 Privoxy server is installed in a machine labeled "logproxy" and listening at port 8118. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
  > log-proxy is used everywhere
- > logproxy is used in manifest variables and box name
+ > logproxy without the dash is used in manifest variables and box name
 
 Config file at files/config containing all the proxy configuration will be copied in the node.
 
