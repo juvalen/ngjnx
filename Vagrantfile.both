@@ -2,14 +2,14 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "echo Hola from $HOSTNAME"
 
 # reverse box
-  config.vm.define "web" do |reverse|
+  config.vm.define "reverse" do |reverse|
     reverse.vm.box = "ubuntu/xenial64"
     reverse.vm.network "public_network", bridge: "wlp16s0"
-    reverse.vm.provision "shell", inline: "apt -y update && apt -y install puppet"
+    reverse.vm.provision "shell", inline: "apt -y update && apt -y install puppet && apt -y install nginx"
 
-    reverse.vm.provision "puppet" do |ngjnx|
-      ngjnx.manifests_path = "manifests"
-      ngjnx.manifest_file = "reverse.pp"
+    reverse.vm.provision "puppet" do |server|
+      server.manifests_path = "manifests"
+      server.manifest_file = "reverse.pp"
     end
 
     reverse.vm.provider :virtualbox do |vb|
@@ -17,6 +17,22 @@ Vagrant.configure("2") do |config|
     end
   end
 
-# log-proxy box
+# logproxy box
+  config.vm.define "logproxy" do |logproxy|
+    logproxy.vm.box = "ubuntu/xenial64"
+    logproxy.vm.network "public_network", bridge: "wlp16s0"
+
+    # Setting up an updated xenial64 machine
+    logproxy.vm.provision "shell", inline: "apt -y update && apt -y install puppet"
+
+    logproxy.vm.provision "puppet" do |ngjnx|
+      ngjnx.manifests_path = "manifests"
+      ngjnx.manifest_file = "log-proxy.pp"
+    end
+
+    logproxy.vm.provider :virtualbox do |vb|
+      vb.name = "log-proxy"
+    end
+  end
 
 end

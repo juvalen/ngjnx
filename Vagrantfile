@@ -1,1 +1,1 @@
-Vagrantfile.reverse
+Vagrantfile.both

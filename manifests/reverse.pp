@@ -1,9 +1,8 @@
 $docroot = '/var/www/html'
-$packages = ['curl','nginx'] 
+$packages = ['curl'] 
 
 package { $packages: 
   ensure => "installed",
-  notify => File['/etc/nginx/sites-available/reverse-proxy.conf'],
 }
 
 # Creates an index file for testing

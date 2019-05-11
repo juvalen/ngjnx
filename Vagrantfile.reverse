@@ -4,7 +4,7 @@ Vagrant.configure("2") do |reverseconfig|
 #    use_dhcp_assigned_default_route: true
 
   # Setting up an updated xenial64 machine
-  reverseconfig.vm.provision "shell", inline: "apt -y update && apt -y install puppet"
+  reverseconfig.vm.provision "shell", inline: "apt -y update && apt -y install puppet && apt -y install nginx"
 
   reverseconfig.vm.provision "puppet" do |ngjnx|
     ngjnx.manifests_path = "manifests"

@@ -14,7 +14,14 @@ This module installs a reverse and a forward proxy with puppet and vagrant in Vi
 
 ### Operation
 To build and deploy the servers just enter:
+
 `$ vagrant up -provision`
+
+and two machines will be created in Virtualbox:
+
+- reverse
+
+- log-proxy
 
 ## reverse: nginx as reverse proxy with routing
 From the virtual machine it can be tested:
@@ -42,7 +49,7 @@ Generated ahead in host with:
 which produced both cert.key and cert.pem in `/vagrant/files` with no passphrase.
 
 
-## log-proxy Privoxy proxy for log analysis
+## log-proxy: Privoxy proxy for log analysis
 Privoxy server is installed in a machine labeled "log-proxy" and listening at port 3128. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
 
 Config file at files/config containing all the proxy configuration will be copied in the node.

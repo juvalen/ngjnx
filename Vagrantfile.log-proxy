@@ -10,7 +10,6 @@ Vagrant.configure("2") do |config|
     ngjnx.manifest_file = "log.pp"
   end
 
-# Renames VM
   config.vm.provider :virtualbox do |vb|
     vb.name = "log-proxy"
   end
