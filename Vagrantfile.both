@@ -1,0 +1,22 @@
+# reverse box
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell", inline: "echo Hola from $HOSTNAME"
+
+  config.vm.define "web" do |reverse|
+    reverse.vm.box = "ubuntu/xenial64"
+    reverse.vm.network "public_network", bridge: "wlp16s0"
+    reverse.vm.provision "shell", inline: "apt -y update && apt -y install puppet"
+
+    reverse.vm.provision "puppet" do |ngjnx|
+      ngjnx.manifests_path = "manifests"
+      ngjnx.manifest_file = "reverse.pp"
+    end
+
+    reverse.vm.provider :virtualbox do |vb|
+      vb.name = "reverse"
+    end
+  end
+
+# log-proxy box
+
+end

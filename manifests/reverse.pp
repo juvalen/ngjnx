@@ -23,7 +23,7 @@ file { "/etc/nginx/sites-available/reverse-proxy.conf":
 file { "/etc/nginx/sites-enabled/reverse-proxy.conf":
   ensure => 'link',
   target => "/vagrant/files/reverse-proxy.conf",
-  notify  => Service['nginx'],
+#  notify  => Service['nginx'],
 }
 
 # Creates an index file for testing

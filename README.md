@@ -9,22 +9,21 @@ This module installs a reverse and a forward proxy with puppet and vagrant in Vi
 ### Requirements
 * A Virtualbox appliance
 * Puppet and modules installed
-
-### Operation
-Puppet needs nginx module installed.
-
+* Puppet nginx module installed
 `$ puppet module install puppet-nginx`
 
-To construct and deploy the server just enter:
+### Operation
+To build and deploy the servers just enter:
 `$ vagrant up -provision`
 
-Them from the virtual machine it can be tested:
+## reverse: nginx as reverse proxy with routing
+From the virtual machine it can be tested:
 
 `$ curl localhost/resource2 (dumps content of www.google.com)`
 
 `$ curl localhost/whatever  (dumps content of www.gg.com)`
 
-or access virtualbox IP at port 80. It works with https. 
+or accessing virtualbox IP at port 80. It works with https. 
 
 The IP address of the box could be retrieved from host using:
 
@@ -40,8 +39,8 @@ Generated ahead in host with:
 which produced both cert.key and cert.pem in `/vagrant/files` with no passphrase.
 
 
-## Installs Privoxy proxy for log analysis
-Privoxy server is installed and listening at port 3128. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
+## log-proxy Privoxy proxy for log analysis
+Privoxy server is installed in a machine labeled "log-proxy" and listening at port 3128. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
 
 Config file at files/config containing all the proxy configuration will be copied in the node.
 
