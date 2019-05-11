@@ -13,11 +13,11 @@ file { "/etc/privoxy/config":
 #  notify => Exec[listen-address],
 }
 
-#exec { 'listen-address':
-#  command => "/vagrant/files/listen-address-enp0s8",
-#  user => "root",
-#  notify => Service[privoxy],
-#}
+exec { 'listen-address':
+  command => "/vagrant/files/listen-address-enp0s8",
+  user => "root",
+  notify => Service[privoxy],
+}
 
 service { 'privoxy':
   ensure => "running",

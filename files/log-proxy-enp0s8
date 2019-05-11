@@ -1,0 +1,10 @@
+#!/bin/bash
+# Appends a line to files/config to enable network access
+enp0s8="vagrant ssh logproxy -c facter | grep ipaddress_enp0s8 | sed -e 's/.*=> //'"
+mipp=$(eval $enp0s8)
+mip=`echo $mipp | tr -cd "[:print:]\n"`
+export port=8118
+#
+str='listen-address $mip:$port # inserted by log-proxy-enp0s8'
+line="$(echo $str | sed -e "s/\$mip/${mip}/" | sed -e "s/\$port/${port}/")"
+echo $line >>files/config
