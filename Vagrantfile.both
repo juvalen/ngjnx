@@ -1,7 +1,7 @@
-# reverse box
 Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "echo Hola from $HOSTNAME"
 
+# reverse box
   config.vm.define "web" do |reverse|
     reverse.vm.box = "ubuntu/xenial64"
     reverse.vm.network "public_network", bridge: "wlp16s0"
