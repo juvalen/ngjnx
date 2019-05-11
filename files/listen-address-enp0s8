@@ -2,7 +2,7 @@
 # Appends a line to /etc/privoxy/config to enable network access
 enp0s8="ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"
 export mip=$(eval $enp0s8)
-export port=3128
+export port=8118
 #
 echo "listen-address $mip:$port # inserted by listen-address-enp0s8" >>/etc/privoxy/config
 #sed s/>>>INSERT ADDRESS.*/listen-address $mip:$port # inserted by listen-address-enp0s8/ /etc/privoxy/config

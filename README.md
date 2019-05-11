@@ -12,6 +12,14 @@ This module installs a reverse and a forward proxy with puppet and vagrant in Vi
 * Puppet nginx module installed
 `$ puppet module install puppet-nginx`
 
+### Limitations
+* Local network interface is wlp16s0
+* Box network inerface is enp0s8
+
+Tune them with your environment at `Vagrantfile`.
+
+Also create a new file with the name of your interface at the box and replace it inside the file too. Take **files/listen-address-enp0s8** as a template.
+
 ### Operation
 To build and deploy the servers just enter:
 
@@ -57,7 +65,7 @@ which produced both cert.key and cert.pem in `/vagrant/files` with no passphrase
 
 
 ## log-proxy: Privoxy proxy for log analysis
-Privoxy server is installed in a machine labeled "logproxy" and listening at port 3128. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
+Privoxy server is installed in a machine labeled "logproxy" and listening at port 8118. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
  > log-proxy is used everywhere
  > logproxy is used in manifest variables and box name
 
