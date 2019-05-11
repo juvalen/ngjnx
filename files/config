@@ -2101,6 +2101,3 @@ socket-timeout 300
 #
 #
 #
-listen-address :3128 # inserted by listen-address-enp0s8
-listen-address :3128 # inserted by listen-address-enp0s8
-listen-address 192.168.1.137:3128 # inserted by listen-address-enp0s8
