@@ -19,11 +19,14 @@ To build and deploy the servers just enter:
 ## reverse: nginx as reverse proxy with routing
 From the virtual machine it can be tested:
 
-`$ curl localhost/resource2 (dumps content of www.google.com)`
+`$ curl localhost/whatever (dumps local content from /var/www/html)`
 
-`$ curl localhost/whatever  (dumps content of www.gg.com)`
+or accessing virtualbox IP at port 80. It works with https as:
 
-or accessing virtualbox IP at port 80. It works with https. 
+`$ curl -k https://localhost/resource2 (dumps content of www.google.com)`
+
+`$ curl -k https://localhost/whatever  (dumps content of www.gg.com)`
+
 
 The IP address of the box could be retrieved from host using:
 
