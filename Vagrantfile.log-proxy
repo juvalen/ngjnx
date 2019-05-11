@@ -1,16 +1,16 @@
-Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/xenial64"
-  config.vm.network "public_network", bridge: "wlp16s0"
+Vagrant.configure("2") do |logproxy|
+  logproxy.vm.box = "ubuntu/xenial64"
+  logproxy.vm.network "public_network", bridge: "wlp16s0"
 
   # Setting up an updated xenial64 machine
-  config.vm.provision "shell", inline: "apt -y update && apt -y install puppet && apt -y install privoxy"
+  logproxy.vm.provision "shell", inline: "apt -y update && apt -y install puppet && apt -y install privoxy"
 
-  config.vm.provision "puppet" do |ngjnx|
+  logproxy.vm.provision "puppet" do |ngjnx|
     ngjnx.manifests_path = "manifests"
     ngjnx.manifest_file = "log-proxy.pp"
   end
 
-  config.vm.provider :virtualbox do |vb|
+  logproxy.vm.provider :virtualbox do |vb|
     vb.name = "logproxy"
   end
 
