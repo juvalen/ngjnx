@@ -1,1 +1,1 @@
-Vagrantfile.log
+Vagrantfile.proxy-log
