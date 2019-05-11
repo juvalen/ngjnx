@@ -1,0 +1,5 @@
+#!/bin/bash
+# Appends a line to /etc/privoxy/config to enable network access
+enp0s8="ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"
+#
+echo "listen-address `eval $enp0s8`:3128 # inserted with listen-address-enp0s8" >>/etc/privoxy/config

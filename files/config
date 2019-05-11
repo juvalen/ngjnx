@@ -779,7 +779,7 @@ logfile privoxy
 #
 #        listen-address [::1]:8118
 #
-listen-address  192.168.1.143:3128
+listen-address  127.0.0.1:3128 # localhost didn't work
 #
 #  4.2. toggle
 #  ============
