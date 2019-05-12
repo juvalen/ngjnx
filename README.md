@@ -1,6 +1,6 @@
 # Module juvalen/ngjnx
-## Installs two proxies using puppet
-This module installs a reverse and a forward proxy with puppet and vagrant in in two boxes with Virtualbox provider.
+## Installs two proxy servers using puppet
+This module installs in two boxes a reverse and a forward proxy, provided by Virtualbox and provisioned with puppet using vagrant. Based on these tools:
 
 **nginx** works as a reverse proxy performing also some routing.
 
@@ -33,16 +33,16 @@ and two machines will be created in Virtualbox with names:
 
 - **logproxy**
 
+The IP address of the boxes could be retrieved from host using:
+
+`$ vagrant ssh NODENAME -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
+
 Connect to each machine using:
 
-`$ vagrant ssh NODENAME`
+`$ vagrant ssh <IPreverse>`
 
 ## reverse: nginx as reverse proxy with routing
-From virtual machine **reverse** it can be tested:
-
-`$ curl localhost/whatever` (dumps local content from /var/www/html)
-
-or accessing virtualbox IP at port 80. It works with https as:
+A reverse proxy can be accessed through virtualbox IP at port 443. From virtual machine **reverse** it can be tested:
 
 `$ curl -k https://localhost/resource2` (dumps content of www.google.com)
 
@@ -52,9 +52,13 @@ Or from other nodes in the network access:
 
 `$ curl -k https://<IP>/whatever`
 
-The IP address of the box could be retrieved from host using:
+Locally:
 
-`$ vagrant ssh NODENAME -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
+`$ curl localhost/whatever` (dumps local content from /var/www/html)
+
+The IP address of the **reverse** box could be retrieved from host using:
+
+`$ vagrant ssh reverse -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
 
 provided the interface used in the box is **enp0s8**, fact to be retrieved from the machine.
 
@@ -93,6 +97,10 @@ Logged data will be stored in `/var/log/privoxy/privoxy`
 That log data can be pretty rendered on-line using the provided parser:
 
 `$ tail -f /var/log/privoxy/privoxy | privoxy-log-parser`
+
+The IP address of the **logproxy** box could be retrieved from host using:
+
+`$ vagrant ssh logproxy -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
 
 ## Health checking
 A simple and effective method for testing the health of these services is to launch a cron managed wget query to each of the servers:

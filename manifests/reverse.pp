@@ -21,6 +21,7 @@ file { "/etc/nginx/sites-available/reverse-proxy.conf":
 file { "/etc/nginx/sites-enabled/reverse-proxy.conf":
   ensure => 'link',
   target => "/vagrant/files/reverse-proxy.conf",
+  notify => Exec['restart-nginx'],
 }
 
 file { "/etc/nginx/sites-available/default":
@@ -30,16 +31,15 @@ file { "/etc/nginx/sites-available/default":
 # Remove nginx default configuration file
 file { "/etc/nginx/sites-enabled/default":
   ensure  => absent,
-  notify  => Service['nginx'],
 }
 
 # This service is not working properly ???
-# I resort to Exec
 service { 'nginx':
   ensure => "running",
   enable => "true",
 }
 
+# I resorted to good old Exec
 exec { 'restart-nginx':
   command => "/bin/systemctl restart nginx",
   user => "root",
