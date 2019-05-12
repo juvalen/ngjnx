@@ -1,10 +1,13 @@
 Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "echo Hola from $HOSTNAME"
 
-# reverse box
+# REVERSE proxy box
   config.vm.define "reverse" do |reverse|
+    # Setting up a xenial64 machine
     reverse.vm.box = "ubuntu/xenial64"
     reverse.vm.network "public_network", bridge: "wlp16s0"
+
+    # Updating xenial64 machine
     reverse.vm.provision "shell", inline: "apt -y update && apt -y install puppet && apt -y install nginx"
 
     reverse.vm.provision "puppet" do |server|
@@ -17,13 +20,14 @@ Vagrant.configure("2") do |config|
     end
   end
 
-# logproxy box
+# LOGPROXY box
   config.vm.define "logproxy" do |logproxy|
+    # Setting up a xenial64 machine
     logproxy.vm.box = "ubuntu/xenial64"
     logproxy.vm.network "public_network", bridge: "wlp16s0"
 
-    # Setting up an updated xenial64 machine
-    logproxy.vm.provision "shell", inline: "apt -y update && apt -y install puppet && apt -y install privoxy"
+    # Updating xenial64 machine
+    logproxy.vm.provision "shell", inline: "apt -y update && apt -y install puppet"
 
     logproxy.vm.provision "puppet" do |ngjnx|
       ngjnx.manifests_path = "manifests"

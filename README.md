@@ -2,7 +2,7 @@
 ## Installs two proxies using puppet
 This module installs a reverse and a forward proxy with puppet and vagrant in in two boxes with Virtualbox provider.
 
-**nginx** works as a reverse proxy doing also some routing.
+**nginx** works as a reverse proxy performing also some routing.
 
 **privoxy** provides http access logs filtered.
 
@@ -35,7 +35,7 @@ and two machines will be created in Virtualbox with names:
 
 Connect to each machine using:
 
-`$ vagrant ssh NAME`
+`$ vagrant ssh NODENAME`
 
 ## reverse: nginx as reverse proxy with routing
 From the virtual machine it can be tested:
@@ -54,7 +54,7 @@ Or from other nodes in the network:
 
 The IP address of the box could be retrieved from host using:
 
-`$ vagrant ssh -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
+`$ vagrant ssh NODENAME -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
 
 provided the interface used in the box is **enp0s8**, fact to be retrieved from the machine.
 
@@ -74,7 +74,7 @@ _**log-proxy** tag is used everywhere_
 _**logproxy** without the dash is used in manifest variables and box name_
 
 ### Rationale
-For this task a rapid assessment of available tools was made among **tcpdump**, **getent**, **wireshark**, **ZAP**, **snort**, **squid**, **mitproxy**, **nginx** and **Postman**, being finally selected **Privoxy**.
+For this task a quick assessment of available tools was made among **tcpdump**, **getent**, **wireshark**, **ZAP**, **snort**, **squid**, **mitproxy**, **nginx** and **Postman**, being finally selected **Privoxy**. Yet comercial **nginx plus** can closely fit the requirements.
 
 ### Configuration
 Proxy configuration file at files/config is copied to the node.

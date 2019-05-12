@@ -1,5 +1,5 @@
 $log = '/var/log/nginx/proxy.log'
-$packages = ['curl'] 
+$packages = ['curl','privoxy']
 
 package { $packages: 
   ensure => "installed",
