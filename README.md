@@ -38,7 +38,7 @@ Connect to each machine using:
 `$ vagrant ssh NODENAME`
 
 ## reverse: nginx as reverse proxy with routing
-From the virtual machine it can be tested:
+From virtual machine **reverse** it can be tested:
 
 `$ curl localhost/whatever` (dumps local content from /var/www/html)
 
@@ -48,7 +48,7 @@ or accessing virtualbox IP at port 80. It works with https as:
 
 `$ curl -k https://localhost/whatever`  (dumps content of www.gg.com)
 
-Or from other nodes in the network:
+Or from other nodes in the network access:
 
 `$ curl -k https://<IP>/whatever`
 
@@ -59,15 +59,17 @@ The IP address of the box could be retrieved from host using:
 provided the interface used in the box is **enp0s8**, fact to be retrieved from the machine.
 
 ### Certificate for https
-It was generated in localhost at development time with:
+It was generated a self signed certificate in localhost at development time with:
 
 `$ openssl req -x509 -newkey rsa:4096 -keyout cert.key -out cert.pem -days 365 -subj "/C=ES/ST=Madrid/L=Madrid/O=IT/CN=ubuntu-xenial"`
 
-which produced both `cert.key` and `cert.pem` in `/vagrant/files` with no passphrase.
+which produced both `cert.key` and `cert.pem` with no passphrase, and was copied to `/vagrant/files` 
 
 
 ## logproxy: Privoxy proxy for log analysis
-Privoxy server is installed in a machine labeled *logproxy* and listening at port 8118. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
+Privoxy server is installed in a machine labeled **logproxy** and listening at port 8118. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
+
+Caveat for code viewers:
 
 _**log-proxy** tag is used everywhere_
 
@@ -81,7 +83,7 @@ Proxy configuration file at files/config is copied to the node.
 
 In config file access through the proxy is allowed to IPs in the 192.168.1.0/24.
 
-It is configured to log debug levels 1, 2, 8, 512 & 65536 which provides this sample format:
+It is currently configured to log debug levels 1, 2, 8, 512 & 65536 which provides this sample format:
 >2019-05-11 22:48:51.024 7fa925648700 Connect: Connected to www.eff.org[151.101.132.201]:443.
 
 Listen address has to be that of the adaptor, **enp0s8** for my computer.
@@ -92,7 +94,7 @@ That log data can be pretty rendered on-line using the provided parser:
 
 `$ tail -f /var/log/privoxy/privoxy | privoxy-log-parser`
 
-## Health testing
+## Health checking
 A simple and effective method for testing the health of these services is to launch a cron managed wget query to each of the servers:
 
 `wget https://domain.com`
