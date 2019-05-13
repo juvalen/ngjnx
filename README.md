@@ -36,11 +36,11 @@ and two machines will be created in Virtualbox with names:
 
 The IP address of the boxes could be retrieved from host using:
 
-`$ vagrant ssh NODENAME -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
+`$ NODEIP = $(vagrant ssh NODENAME -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'")`
 
 Connect to each machine using:
 
-`$ vagrant ssh <IPreverse>`
+`$ vagrant ssh $NODEIP`
 
 ## reverse: nginx as reverse proxy with routing
 A reverse proxy can be accessed through virtualbox IP at port 443. From virtual machine **reverse** it can be tested:
