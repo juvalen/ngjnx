@@ -7,6 +7,7 @@ This module installs in two boxes a reverse and a forward proxy, provided by Vir
 **privoxy** provides http access logs filtered.
 
 ### Requirements
+* Vagrant application
 * A Virtualbox appliance
 * Puppet and modules installed
 * Puppet nginx module installed
