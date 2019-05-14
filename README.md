@@ -49,13 +49,11 @@ A reverse proxy can be accessed through virtualbox IP at port 443. From virtual 
 
 `$ curl -k https://localhost/whatever`  (dumps content of www.aaa.com)
 
+`$ curl localhost/whatever` (dumps content from /var/www/html)
+
 Or from other nodes in the network access:
 
-`$ curl -k https://<IP>/whatever`
-
-Locally:
-
-`$ curl localhost/whatever` (dumps local content from /var/www/html)
+`$ curl -k https://<NODEIP>/whatever`
 
 The IP address of the **reverse** box could be retrieved at host using:
 
@@ -66,17 +64,17 @@ provided the interface used in the box is **enp0s8**, fact to be retrieved from 
 ### Certificate for https
 It was generated a self signed certificate in localhost at development time with:
 
-`$ openssl req -x509 -newkey rsa:4096 -keyout cert.key -out cert.pem -days 365 -subj "/C=ES/ST=Madrid/L=Madrid/O=IT/CN=ubuntu-xenial"`
+`$ openssl req -x509 -newkey rsa:4096 -keyout cert.key -out cert.pem -days 365 -subj "/C=ES/ST=Madrid/L=Madrid/O=IT/CN=reverse"`
 
-which produced both `cert.key` and `cert.pem` with no passphrase, and were copied to `/vagrant/files` 
+which produced both `cert.key` and `cert.pem` with no passphrase, to be copied to `/vagrant/files` 
 
 
 ## logproxy: Privoxy proxy for log analysis
-Privoxy server is installed in a machine labeled **logproxy** and listening at port 8118. Browsers in the local network (192.168.1.0/24) should set their proxy address to that box and port.
+Privoxy server is installed in a machine labeled **logproxy** and listening at port 8118. Browsers in the local network (192.168.1.0/24) should set their proxy address to it.
 
 Caveat for code viewers:
 
-_**log-proxy** tag is used everywhere_
+_**log-proxy** tag is used in most places_
 
 _**logproxy** without the dash is used in manifest variables and box name_
 
@@ -89,7 +87,7 @@ Proxy configuration file at files/config is copied to the node.
 In config file access through the proxy is allowed to IPs in the 192.168.1.0/24.
 
 It is currently configured to log debug levels 1, 2, 8, 512 & 65536 which provides this sample format:
->2019-05-11 22:48:51.024 7fa925648700 Connect: Connected to www.eff.org[151.101.132.201]:443.
+> 2019-05-11 22:48:51.024 7fa925648700 Connect: Connected to www.eff.org[151.101.132.201]:443.
 
 Listen address has to be that of the adaptor, **enp0s8** for my computer.
 
@@ -116,7 +114,7 @@ A simple and effective method for testing the health of these services is to lau
 
 `wget http://abc.com`
 
-and compare the return with a template. Alarms could be raised.
+and comparing retrieved data with a template. Alarms could be raised.
 
 ## TODOs
 1. As the proxy log file provides a wealth of information and modern web page complexity, duration of TCP connections should be gathered either by off-line processing or with dedicated hardware.
