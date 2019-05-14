@@ -14,12 +14,14 @@ This module installs in two boxes a reverse and a forward proxy, provided by Vir
 `$ puppet module install puppet-nginx`
 
 ### Initial configurarion
-* Local network interface is wlp16s0
-* Box network inerface is enp0s8
+* Local network interface is **wlp16s0**
+* Box network inerface is **enp0s8**
 
-Tune them to target environment at `Vagrantfile`.
+Tune them at `Vagrantfile` to target your environment.
 
-Also create a new file with the name of your interface at the box and replace it inside the file too. Use `files/listen-address-enp0s8` as a template.
+Also create a new file with the name of your interface at the box and replace it inside the file too:
+
+`$ cp files/listen-address-enp0s8 files/listen-address-BOX_INTERFACE_NAME`
 
 The development was done in a `192.168.1.0` network, so for other ranges some network addresses in the configuration have to be changed.
 
@@ -38,12 +40,12 @@ The IP address of the boxes could be retrieved at host using:
 
 `$ NODEIP = $(vagrant ssh NODENAME -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'")`
 
-Connect to each machine using:
+Connect to each box using:
 
 `$ vagrant ssh $NODEIP`
 
 ## reverse: nginx as reverse proxy with routing
-A reverse proxy can be accessed through virtualbox IP at port 443. From virtual machine **reverse** it can be tested:
+A reverse proxy can be accessed through virtualbox IP at port 443. From box **reverse** it can be tested:
 
 `$ curl -k https://localhost/resource2` (dumps content of www.gg.com)
 
@@ -59,14 +61,14 @@ The IP address of the **reverse** box could be retrieved at host using:
 
 `$ vagrant ssh reverse -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
 
-provided the interface used in the box is **enp0s8**, fact to be retrieved from the box.
+provided the interface used in the box is **enp0s8**, fact to be retrieved from the there.
 
 ### Certificate for https
 It was generated a self signed certificate in localhost at development time with:
 
 `$ openssl req -x509 -newkey rsa:4096 -keyout cert.key -out cert.pem -days 365 -subj "/C=ES/ST=Madrid/L=Madrid/O=IT/CN=reverse"`
 
-which produced both `cert.key` and `cert.pem` with no passphrase, to be copied to `/vagrant/files` 
+which produced both `cert.key` and `cert.pem` with no passphrase, to be copied to `/vagrant/files` .
 
 
 ## logproxy: Privoxy proxy for log analysis
