@@ -45,9 +45,9 @@ Connect to each machine using:
 ## reverse: nginx as reverse proxy with routing
 A reverse proxy can be accessed through virtualbox IP at port 443. From virtual machine **reverse** it can be tested:
 
-`$ curl -k https://localhost/resource2` (dumps content of www.google.com)
+`$ curl -k https://localhost/resource2` (dumps content of www.gg.com)
 
-`$ curl -k https://localhost/whatever`  (dumps content of www.gg.com)
+`$ curl -k https://localhost/whatever`  (dumps content of www.aaa.com)
 
 Or from other nodes in the network access:
 
