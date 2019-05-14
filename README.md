@@ -34,7 +34,7 @@ and two machines will be created in Virtualbox with names:
 
 - **logproxy**
 
-The IP address of the boxes could be retrieved from host using:
+The IP address of the boxes could be retrieved at host using:
 
 `$ NODEIP = $(vagrant ssh NODENAME -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'")`
 
@@ -57,18 +57,18 @@ Locally:
 
 `$ curl localhost/whatever` (dumps local content from /var/www/html)
 
-The IP address of the **reverse** box could be retrieved from host using:
+The IP address of the **reverse** box could be retrieved at host using:
 
 `$ vagrant ssh reverse -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
 
-provided the interface used in the box is **enp0s8**, fact to be retrieved from the machine.
+provided the interface used in the box is **enp0s8**, fact to be retrieved from the box.
 
 ### Certificate for https
 It was generated a self signed certificate in localhost at development time with:
 
 `$ openssl req -x509 -newkey rsa:4096 -keyout cert.key -out cert.pem -days 365 -subj "/C=ES/ST=Madrid/L=Madrid/O=IT/CN=ubuntu-xenial"`
 
-which produced both `cert.key` and `cert.pem` with no passphrase, and was copied to `/vagrant/files` 
+which produced both `cert.key` and `cert.pem` with no passphrase, and were copied to `/vagrant/files` 
 
 
 ## logproxy: Privoxy proxy for log analysis
@@ -99,7 +99,7 @@ That log data can be pretty rendered on-line using the provided parser:
 
 `$ tail -f /var/log/privoxy/privoxy | privoxy-log-parser`
 
-The IP address of the **logproxy** box could be retrieved from host using:
+The IP address of the **logproxy** box could be retrieved at host using:
 
 `$ vagrant ssh logproxy -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
 
