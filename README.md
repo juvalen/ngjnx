@@ -42,7 +42,7 @@ The IP address of the boxes could be retrieved at host using:
 
 Connect to each box using:
 
-`$ vagrant ssh $NODEIP`
+`$ vagrant ssh NODENAME`
 
 ## reverse: nginx as reverse proxy with routing
 A reverse proxy can be accessed through virtualbox IP at port 443. From box **reverse** it can be tested:
