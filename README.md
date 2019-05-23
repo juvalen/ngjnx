@@ -119,5 +119,5 @@ A simple and effective method for testing the health of these services is to lau
 and comparing retrieved data with a template. Alarms could be raised.
 
 ## TODOs
-1. As the proxy log file provides a wealth of information and modern web page complexity, duration of TCP connections should be gathered either by off-line processing or with dedicated hardware.
+1. Proxy log file provides a wealth of information. Due modern web page complexity, duration of TCP connections should be gathered either by off-line processing or with dedicated hardware.
 1. To assess the workload supported by this architecture.
