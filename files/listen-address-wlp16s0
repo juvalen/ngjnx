@@ -1,0 +1,8 @@
+#!/bin/bash
+# Appends a line to /etc/privoxy/config to enable network access
+wlp16s0="ip address show wlp16s0 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"
+ip=$(eval $wlp16s0)
+port=8118
+#
+sudo echo "listen-address $ip:$port # inserted by listen-address-wlp16s0" >>/etc/privoxy/config
+export http_proxy=$ip:$port
