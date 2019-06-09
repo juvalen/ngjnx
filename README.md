@@ -106,7 +106,7 @@ The IP address of the **logproxy** box could be retrieved at host using:
 `$ vagrant ssh logproxy -c "ip address show enp0s8 | grep 'inet ' | sed -e 's/^.*inet //' -e 's/\/.*$//'"`
 
 ## Health checking
-A simple and effective method for testing the health of these services is to launch a cron managed wget query to each of the servers:
+A simple and yet effective method for testing the health of these services is launching a cron managed wget query to each of the servers:
 
 `wget https://domain.com`
 
@@ -118,7 +118,7 @@ A simple and effective method for testing the health of these services is to lau
 
 `wget http://abc.com`
 
-and comparing retrieved data with a template. Alarms could be raised.
+and comparing retrieved data with a template alarms could be raised.
 
 ## TODOs
 1. Proxy log file provides a wealth of information. Due modern web page complexity, duration of TCP connections should be gathered either by off-line processing or with dedicated hardware.
