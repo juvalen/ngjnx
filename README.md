@@ -122,4 +122,4 @@ and comparing retrieved data with a template alarms could be raised.
 
 ## TODOs
 1. Proxy log file provides a wealth of information. Due modern web page complexity, duration of TCP connections should be gathered either by off-line processing or with dedicated hardware.
-1. To assess the workload supported by this architecture.
+1. Assess the workload supported by this architecture.
